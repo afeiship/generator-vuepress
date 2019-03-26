@@ -50,7 +50,7 @@ module.exports = class extends Generator {
       function(err, cachePath) {
         // copy files:
         this.fs.copy(
-          glob.sync(resolve(cachePath, '{**,**/.*,.*}')),
+          glob.sync(resolve(cachePath, '{**,.*,**/.*/*}')),
           this.destinationPath()
         );
         done();
@@ -60,8 +60,7 @@ module.exports = class extends Generator {
 
   end() {
     const { project_name, description, ProjectName } = this.props;
-    const files = glob.sync(resolve(this.destinationPath(), '{**,**/.*,.*}'));
-
+    const files = glob.sync(resolve(this.destinationPath(), '{**,.*,**/.*/*}'));
     replace.sync({
       files,
       from: [
